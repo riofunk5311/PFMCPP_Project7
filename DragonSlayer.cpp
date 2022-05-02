@@ -1,12 +1,12 @@
 #include "DragonSlayer.h"
 #include "Dragon.h"
 #include "Utility.h"
-#include "AttackItem.h"
 
 //DragonSlayer::DragonSlayer
-DragonSlayer::DragonSlayer(std::string name_, int hp, int armor) : Character(hp, armor, 57), name(name_)
+DragonSlayer::DragonSlayer(std::string name_, int hp, int armor) : Character(hp, armor, 4), name(name_)
 {
-    
+    helpfulItems = makeHelpfulItems(1);
+    defensiveItems = makeDefensiveItems(9);
 }
 
 //DragonSlayer::getName
@@ -21,9 +21,9 @@ void DragonSlayer::attack(Character& other)
     if( auto* dragon = dynamic_cast<Dragon*>(&other) )
     {
         //DragonSlayers get a 10x boost when attacking dragons, from their attack item.
-        //so they should USE their attack item before attacking the dragon... 
+        //so they should USE their attack item before attacking the dragon...
         //note: they should only use the item if the dragon's hitpoints are > 0...
-        //note: items are single-use only, so you need to reset it after use.  
+        //note: items are single-use only, so you need to reset it after use.
         //look in the Character class for how the other item types are reset after use.
         if( attackItem != nullptr && dragon->getHP() > 0 )
         {
@@ -46,4 +46,3 @@ std::string DragonSlayer::getStats()
 {
     return getCharacterStats(this);
 }
-

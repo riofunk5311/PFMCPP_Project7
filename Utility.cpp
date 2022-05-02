@@ -3,10 +3,6 @@
 #include "HelpfulItem.h"
 #include "DefensiveItem.h"
 #include "Character.h"
-#include "DragonSlayer.h"
-#include "Dragon.h"
-#include "Dwarf.h"
-#include "Paladin.h"
 
 
 std::vector<std::unique_ptr<Item>> makeHelpfulItems(int num)
@@ -111,3 +107,4 @@ void useAttackItem(Character* character, Item* item)
         //dragons don't carry attack items!
     }
 }
+

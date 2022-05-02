@@ -4,8 +4,8 @@
 
 struct AttackItem : Item
 {
-    AttackItem() : Item("attackItem", 10) { }
     ~AttackItem() override;
+    AttackItem() : Item("attackItem", 10) { }
     
     void use(Character* character) override;
 };
