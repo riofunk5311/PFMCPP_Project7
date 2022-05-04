@@ -12,8 +12,8 @@ Character::Character(int hp, int armor_, int attackDamage_ ) :
     attackDamage(attackDamage_)
 {
     initialHitPoints.reset( new int(hitPoints) );
-    initialArmorLevel.reset( new int( armor) );
-    initialAttackDamage.reset( new int( attackDamage) );
+    initialArmorLevel.reset( new int(armor) );
+    initialAttackDamage.reset( new int(attackDamage) );
 }
 
 void Character::attack( Character& other )
@@ -87,16 +87,6 @@ int Character::takeDamage(int damage)
     return hitPoints;
 }
 
-void Character::defeatOpponent(int& initialValue, int& currentValue)
-{
-    if( currentValue < initialValue )
-    {
-        currentValue = initialValue;
-    }
-    currentValue *= 1.1f;
-    initialValue = currentValue;
-}
-
 void Character::attackInternal(Character& other)
 {
     if( other.hitPoints <= 0 )
@@ -112,6 +102,16 @@ void Character::attackInternal(Character& other)
         defeatOpponent(*initialArmorLevel, armor);
         defeatOpponent(*initialAttackDamage, attackDamage);
     }
+}
+
+void Character::defeatOpponent(int& initialValue, int& currentValue)
+{
+    if( currentValue < initialValue )
+    {
+        currentValue = initialValue;
+    }
+    currentValue *= 1.1f;
+    initialValue = currentValue;
 }
 
 void Character::printStats()

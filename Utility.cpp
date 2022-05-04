@@ -1,4 +1,7 @@
 #include "Utility.h"
+#include "Dwarf.h"
+#include "Paladin.h"
+#include "DragonSlayer.h"
 
 #include "HelpfulItem.h"
 #include "DefensiveItem.h"
@@ -59,7 +62,7 @@ void useDefensiveItem(Character* character, Item& item)
     {
         dragonSlayer->boostArmor( item.getBoost() * 1.5 );
     }
-    else if( auto* ch = dynamic_cast<Dragon*>(character) )
+    else if( auto* dragon = dynamic_cast<Dragon*>(character) )
     {
         //dragons don't need defensive items
     }  
@@ -68,17 +71,17 @@ void useHelpfulItem(Character* character, Item* item)
 {
     if( auto* dwarf = dynamic_cast<Dwarf*>(character) )
     {
-        dwarf->boostHitPoints(item->getBoost() * 2);
+        dwarf->boostHitPoints( item->getBoost() * 2) ;
     }
     else if( auto* paladin = dynamic_cast<Paladin*>(character) )
     {
-        paladin->boostHitPoints(item->getBoost() * 1.5);
+        paladin->boostHitPoints( item->getBoost() * 1.5 );
     }
     else if( auto* dragonSlayer = dynamic_cast<DragonSlayer*>(character))
     {
-        dragonSlayer->boostHitPoints(item->getBoost() * 1.25);
+        dragonSlayer->boostHitPoints( item->getBoost() * 1.25 );
     }
-    else if( auto* ch = dynamic_cast<Dragon*>(character) )
+    else if( auto* dragon = dynamic_cast<Dragon*>(character) )
     {
         //dragons don't carry helpful items!
     }
@@ -87,11 +90,11 @@ void useAttackItem(Character* character, Item* item)
 {
     if( auto* dwarf = dynamic_cast<Dwarf*>(character) )
     {
-        dwarf->boostAttackDamage(item->getBoost() * 1.5);
+        dwarf->boostAttackDamage( item->getBoost() * 1.5 );
     }
     else if( auto* paladin = dynamic_cast<Paladin*>(character) )
     {
-        paladin->boostAttackDamage(item->getBoost() * 1.33);
+        paladin->boostAttackDamage( item->getBoost() * 1.33 );
     }
     else if( auto* dragonSlayer = dynamic_cast<DragonSlayer*>(character))
     {
@@ -100,9 +103,9 @@ void useAttackItem(Character* character, Item* item)
         //this means you need to GET the attack damage, multiply it by the item's boost, and BOOST the attackDamage with that multiplied value.  
         //check Character.h for available member functions you can use.
 
-        dragonSlayer->boostAttackDamage(dragonSlayer->getAttackDamage() * item->getBoost());
+        dragonSlayer->boostAttackDamage (dragonSlayer->getAttackDamage() * item->getBoost());
     }
-    else if( auto* dragon = dynamic_cast<Dragon*>(character) )
+    //else if( auto* dragon = dynamic_cast<Dragon*>(character) )
     {
         //dragons don't carry attack items!
     }
